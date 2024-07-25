@@ -1,12 +1,16 @@
 "use client"
 
-import Button from '@/components/button';
+import { memo } from 'react';
 import { useFormState } from "react-dom";
+// import { useSelector } from 'react-redux';
+
+import Button from '@/components/button';
 import { signOut } from '@/lib/actions/auth';
 
 const Dashboard = () => {
 	const [formState, formAction] = useFormState(signOut, undefined);
-    console.log("TCL: Dashboard -> formState", formState)
+	// const pageInfo = useSelector((state: any) => state?.pageInfo);
+	
 	return (
 		<main className="p-24">
 			<form action={formAction}>
@@ -17,4 +21,4 @@ const Dashboard = () => {
 	);
 }
 
-export default Dashboard;
+export default memo(Dashboard);

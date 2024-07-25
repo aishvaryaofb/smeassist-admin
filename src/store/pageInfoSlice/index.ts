@@ -6,14 +6,10 @@ export const initialState: PageInfo | undefined = {
 	query: {},
 	host: '',
 	domain: '',
-	platform: '',
-	isApp: false,
-	appVersion: '',
-	appClientName: '',
-	cookie: {},
 	ip: '',
-	env: process.env.NODE_ENV,
+	env: '',
 	namespace: '',
+	platform: '',
 };
 
 const pageInfoSlice = createSlice({
@@ -21,24 +17,16 @@ const pageInfoSlice = createSlice({
 	initialState,
 	reducers: {
 		updatePageInfoFromReq(state, action: PayloadAction<any>) {
-			const { protocol, path, query, hostname, headers, cookies, platform, ip, namespace } = action.payload;
+			const { protocol, path, query, host, platform, ip, namespace, env } = action.payload;
 			state.protocol = protocol;
 			state.path = path;
 			state.query = query;
-			state.host = hostname;
-			state.isApp =
-				headers['is-android-app'] === 'true' ||
-				headers['is-ios-app'] === 'true' ||
-				headers['x-client-name'] === 'SALES_APP' ||
-				headers['x-client-name'] === 'BUYER_APP' ||
-				cookies.isApp;
-			state.appVersion = headers['x-build-number'];
-			state.appClientName = headers['x-client-name'];
+			state.host = host;
 			state.domain = '';
 			state.platform = platform;
-			state.cookie = cookies;
 			state.ip = ip;
 			state.namespace = namespace;
+			state.env = env;
 		},
 		updateProtocol(state, action: PayloadAction<string>) {
 			state.protocol = action.payload;
@@ -58,18 +46,6 @@ const pageInfoSlice = createSlice({
 		updatePlatform(state, action: PayloadAction<string>) {
 			state.platform = action.payload;
 		},
-		updateIsApp(state, action: PayloadAction<boolean>) {
-			state.isApp = action.payload;
-		},
-		updateAppVersion(state, action: PayloadAction<string>) {
-			state.appVersion = action.payload;
-		},
-		updateAppClientName(state, action: PayloadAction<string>) {
-			state.appClientName = action.payload;
-		},
-		updateCookie(state, action: PayloadAction<Record<string, any>>) {
-			state.cookie = action.payload;
-		},
 		updateNamespace(state, action: PayloadAction<string>) {
 			state.namespace = action.payload;
 		},
@@ -84,10 +60,6 @@ export const {
 	updateHost,
 	updateDomain,
 	updatePlatform,
-	updateIsApp,
-	updateAppVersion,
-	updateAppClientName,
-	updateCookie,
 	updateNamespace,
 } = pageInfoSlice.actions;
 

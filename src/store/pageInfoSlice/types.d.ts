@@ -5,10 +5,6 @@ interface PageInfo {
 	host: string;
 	domain: string;
 	platform: string;
-	isApp: boolean;
-	appVersion: string;
-	appClientName: string;
-	cookie: Record<string, any>;
 	ip: any;
 	env: string;
 	namespace: string;

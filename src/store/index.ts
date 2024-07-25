@@ -8,12 +8,11 @@ import { errorHandlingMiddleware } from '@/store/errorHandlingMiddleware';
 const initStore = (preloadedState?: Partial<RootState>): EnhancedStore => {
 	const store = configureStore({
 	  reducer: rootReducer, // Assuming rootReducer is defined elsewhere
-	  middleware: (getDefaultMiddleware) =>
+	  middleware: (getDefaultMiddleware : any) =>
 			getDefaultMiddleware().concat([SmeAPI.middleware, errorHandlingMiddleware]),
 	  devTools: process.env.NODE_ENV !== 'production', // Adjust based on your environment setup
 	  preloadedState,
 	});
-  
 	return store;
 };
 

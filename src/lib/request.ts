@@ -19,11 +19,11 @@ class RequestManager {
 
     private static getHeaders(header?: Record<string, string>): Record<string, string> {
         let headers: Record<string, string> = {};
-        if (cookieManager.get('auth-token')) {
-            headers['X-ASSIST-TOKEN'] = cookieManager.get('auth-token') as string;
+        if (cookieManager.get('authToken')) {
+            headers['X-ASSIST-TOKEN'] = cookieManager.get('authToken') as string;
         }
-        if (cookieManager.get('organisationId')) {
-            headers['X-ORG-ID'] = cookieManager.get('organisationId') as string;
+        if (cookieManager.get('orgId')) {
+            headers['X-ORG-ID'] = cookieManager.get('orgId') as string;
         }
         headers['content-type'] = 'application/json';
         if (header) {

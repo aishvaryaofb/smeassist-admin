@@ -1,8 +1,8 @@
 import { Middleware } from '@reduxjs/toolkit';
-import { RootState } from '@/store/store';
+import { RootState } from '@/store';
 import { SmeAPI } from '@/store/apiSlice';
 import { initialState, setLoginData } from '@/store/appSlice';
-// import cookieManager from '@/lib/cookies';
+import Cookie from 'js-cookie';
 
 interface ApiErrorAction {
 	type: string;
@@ -23,9 +23,11 @@ export const errorHandlingMiddleware: Middleware<{}, RootState> = (store) => (ne
 		if (action.type.endsWith('/rejected') && action.type.startsWith(SmeAPI.reducerPath)) {
 			// Dispatch an action to update a different slice
 			if (action.payload.status === 401 || action.payload.originalStatus === 401) {
-				store.dispatch(setLoginData(initialState.loginData));
-				// cookieManager.delete('X-Assist-Token');
-    			// cookieManager.delete('X-Org-Id');
+				if (initialState?.loginData) {
+					store.dispatch(setLoginData(initialState.loginData || undefined));
+				}
+				Cookie.remove('authToken');
+    			Cookie.remove('orgId');
 			}
 		}
 	}

@@ -1,20 +1,21 @@
 "use client"
 
-import { useRef } from 'react'
 import { Provider } from 'react-redux'
-import { initStore, Store } from '@/store/store';
+import { initStore, Store } from '@/store';
+import { setLoginData } from '@/store/appSlice';
+import { updatePageInfoFromReq } from '@/store/pageInfoSlice';
 
 export default function StoreProvider({
-	children,
+    children,
+    loginData,
+    pageInfo,
 }: {
-	children: React.ReactNode
+    children: React.ReactNode
+    loginData: any,
+    pageInfo: PageInfo,
 }) {
-	const storeRef = useRef<Store>()
-    if (!storeRef.current) {
-        // Create the store instance the first time this renders
-        storeRef.current = initStore();
-        // storeRef.current.dispatch(initializeCount(count));
-    }
-
-    return <Provider store={storeRef.current}>{children}</Provider>
+    const store : Store = initStore();
+    store.dispatch(setLoginData(loginData));
+    store.dispatch(updatePageInfoFromReq(pageInfo));
+    return <Provider store={store}>{children}</Provider>
 }

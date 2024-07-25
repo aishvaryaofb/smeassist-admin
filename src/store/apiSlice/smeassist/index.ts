@@ -11,7 +11,7 @@ import {
 // import cookieManager from '@/lib/cookies';
 
 // import { isUndefinedOrNullOrEmpty } from '@ofbtech/components.utils';
-import { RootState } from '@/store/store';
+import { RootState } from '@/store';
 // import { isServer } from 'utils';
 
 let createApiFunction = createApi;

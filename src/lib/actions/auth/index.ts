@@ -107,15 +107,14 @@ export async function verifyOtp(prevState: any, formData: FormData) {
         };
     }
     
-    cookieManager.set('auth-token', responseData?.token);
-    // cookieManager.set('organisationId', '2');
+    cookieManager.set('authToken', responseData?.token);
     revalidatePath(routesManager.dashboard.path);
     // redirect(routesManager.dashboard.path);
     return { message: 'Otp verified successfully!', errors: null, data: responseData };
 }
 
 export const signOut = () : void => {
-    cookieManager.delete('auth-token');
-    cookieManager.delete('organisationId');
-    redirect(routes.dashboard.path);
+    cookieManager.delete('authToken');
+    cookieManager.delete('orgId');
+    redirect(routes.login.path);
 }

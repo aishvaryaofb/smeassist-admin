@@ -5,7 +5,7 @@ import { appReducer } from '@/store/appSlice';
 import { pageReducer } from '@/store/pageSlice';
 import { pageInfoReducer } from '@/store/pageInfoSlice';
 
-export const rootReducer = {
+export const rootReducer : any = {
 	...pageReducer,
 	app: appReducer,
 	pageInfo: pageInfoReducer,

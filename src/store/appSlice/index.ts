@@ -44,5 +44,4 @@ export const appSlice = createSlice({
 });
 
 export const { setLoginData, setRoleDetails, setSidebarPermissions, setToggleNav } = appSlice.actions;
-
 export const appReducer = appSlice.reducer;

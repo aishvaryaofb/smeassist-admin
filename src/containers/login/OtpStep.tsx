@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import Modal from '@/components/modal';
 import Button from '@/components/button';
 import TextField from '@/components/textField';
-import { setLoginData } from '@/store/appSlice';
 import { State, verifyOtp } from '@/lib/actions/auth';
 import SubmitButton from '@/containers/login/SubmitButton';
 
@@ -34,10 +33,10 @@ const LoginForm = ({ mobile } : { mobile: string }) => {
     }, [message]);
 
     useEffect(() => {
-        setLoginData(data);
         if (Object.keys(data || {})?.length !== 0) {
             setOpen(true);
         }
+        // eslint-disable-next-line
     }, [data]);
     
     const handleChange = (value : string, type : string) => {
@@ -53,7 +52,7 @@ const LoginForm = ({ mobile } : { mobile: string }) => {
     };
 
     const handleOrgSelection = (minOrgDto: any) => {
-        Cookie.set('organisationId', minOrgDto?.organisationId);
+        Cookie.set('orgId', minOrgDto?.organisationId);
         push('/dashboard');
     };
  
