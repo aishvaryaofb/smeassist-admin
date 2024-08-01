@@ -1,39 +1,44 @@
-import React, { memo } from 'react';
-import { headers } from 'next/headers';
+import React, { memo } from "react";
+import { headers } from "next/headers";
 
-import RequestManager from '@/lib/request';
-import StoreProvider from '@/app/StoreProvider';
+import RequestManager from "@/lib/request";
+import StoreProvider from "@/store/StoreProvider";
 
-type Props = {
-    children: React.ReactNode,
-}
+import Sidebar from "@/components/sidebar";
+import Backdrop from "@/components/backdrop";
 
-const Layout = async ({ children } : Props) => {
-    const loginData = await RequestManager.get("/api/v1/login/getLoggedInDetails");
+import "@/app/(auth)/style.scss";
 
-    const headersList = headers();
-    const newHeaders = new Headers(headersList);
-    const pageInfo : PageInfo = {
-        protocol: newHeaders.get('x-next-protocol') || '',
-        path: newHeaders.get('x-next-pathname') || '',
-        query: newHeaders.get('x-next-search') || '',
-        host:  newHeaders.get('x-forwarded-host') || '',
-        ip: newHeaders.get('X-Forwarded-For') || '',
-        env: newHeaders.get('x-next-env') || '',
-        domain: newHeaders.get('x-next-domain') || '',
-        platform: newHeaders.get('x-next-platform') || '',
-        namespace: newHeaders.get('namespace') || '',
-    };
-    return (
-        <StoreProvider loginData={loginData} pageInfo={pageInfo}>
-            <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-                <div className="w-full flex-none md:w-64">
-                    {/* <SideNav /> */}
-                </div>
-                <div className="flex-grow p-6 md:overflow-y-auto md:p-12">{children}</div>
-            </div>
-        </StoreProvider>
-    )
-}
+type Props = { children: React.ReactNode };
+
+const Layout = async ({ children }: Props) => {
+	const loginData = await RequestManager.getLoggedInDetails();
+
+	const getPageInfo = (): PageInfo => {
+		const headersList = headers();
+		const newHeaders = new Headers(headersList);
+		return {
+			protocol: newHeaders.get("x-next-protocol") || "",
+			path: newHeaders.get("x-next-pathname") || "",
+			query: newHeaders.get("x-next-search") || "",
+			host: newHeaders.get("x-forwarded-host") || "",
+			ip: newHeaders.get("X-Forwarded-For") || "",
+			env: newHeaders.get("x-next-env") || "",
+			domain: newHeaders.get("x-next-domain") || "",
+			platform: newHeaders.get("x-next-platform") || "",
+			namespace: newHeaders.get("namespace") || "",
+		};
+	};
+
+	return (
+		<StoreProvider loginData={loginData} pageInfo={getPageInfo()}>
+			<main id="pageLayout" className="pageLayout min-h-svh bg-slate-50">
+				<Sidebar />
+				<section className="pageContent p-4">{children}</section>
+			</main>
+			{/* <Backdrop open /> */}
+		</StoreProvider>
+	);
+};
 
 export default memo(Layout);

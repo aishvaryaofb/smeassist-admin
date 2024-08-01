@@ -7,11 +7,11 @@ import {
 	BaseQueryFn,
 	FetchArgs,
 	FetchBaseQueryError,
-} from '@reduxjs/toolkit/query/react';
+} from "@reduxjs/toolkit/query/react";
 // import cookieManager from '@/lib/cookies';
 
 // import { isUndefinedOrNullOrEmpty } from '@ofbtech/components.utils';
-import { RootState } from '@/store';
+import { RootState } from "@/store";
 // import { isServer } from 'utils';
 
 let createApiFunction = createApi;
@@ -26,7 +26,7 @@ You can remove this modification if you do not need this api to be used on the s
 
 const getBaseUrlByNamespace = (namespace: string): string => {
 	switch (namespace) {
-		case 'smeassist':
+		case "smeassist":
 			return SME_API_URL;
 		default:
 			return SME_API_URL;
@@ -35,7 +35,7 @@ const getBaseUrlByNamespace = (namespace: string): string => {
 
 const dynamicBaseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, api, extraOptions) => {
 	const rootState = api.getState() as RootState;
-	const { pageInfo } = rootState;
+	const { pageInfo }: any = rootState;
 	const baseUrl = getBaseUrlByNamespace(pageInfo?.namespace);
 
 	if (!baseUrl) {
@@ -65,8 +65,8 @@ const dynamicBaseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryE
 			// 	headers.set('X-LOCATION-LAT', latitude);
 			// 	headers.set('X-LOCATION-LONG', longitude);
 			// }
-			headers.set('X-OFB-PLATFORM', PLATFORM);
-			headers.set('X-NAMESPACE', namespace);
+			headers.set("X-OFB-PLATFORM", PLATFORM);
+			headers.set("X-NAMESPACE", namespace);
 			return headers;
 		},
 	});
@@ -75,8 +75,8 @@ const dynamicBaseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryE
 };
 
 export const SmeAPI = createApiFunction({
-	reducerPath: 'SmeAPI',
+	reducerPath: "SmeAPI",
 	baseQuery: dynamicBaseQuery,
-	tagTypes: ['AUTH'],
+	tagTypes: ["AUTH"],
 	endpoints: () => ({}),
 });

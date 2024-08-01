@@ -1,15 +1,15 @@
 /**
- * 
+ *
  * ButtonWrapper
- * 
+ *
  */
 
-import { FC } from 'react';
-import { CircularProgress } from '@/components/progress';
-import Button, { ButtonProps } from '@mui/material/Button';
+import { FC } from "react";
+import { CircularProgress } from "@/components/progress";
+import Button, { ButtonProps } from "@mui/material/Button";
 
 interface CustomProps extends ButtonProps {
-	isLoading?: boolean,
+	isLoading?: boolean;
 }
 
 const ButtonWrapper: FC<CustomProps> = ({ isLoading, children, ...props }) => {

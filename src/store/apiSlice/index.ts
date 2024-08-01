@@ -1,1 +1,1 @@
-export { SmeAPI } from '@/store/apiSlice/smeassist';
+export { SmeAPI } from "@/store/apiSlice/smeassist";

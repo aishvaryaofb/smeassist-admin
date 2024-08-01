@@ -1,10 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface AppState {
 	loginData: LoginDto;
 	roleDetails: RoleDto;
 	sidebarPermissions: any;
 	toggleNav: boolean;
+	toggleBackdrop: boolean;
 }
 
 export const initialState: AppState | undefined = {
@@ -22,10 +23,11 @@ export const initialState: AppState | undefined = {
 	},
 	sidebarPermissions: {},
 	toggleNav: false,
+	toggleBackdrop: false,
 };
 
 export const appSlice = createSlice({
-	name: 'app',
+	name: "app",
 	initialState,
 	reducers: {
 		setLoginData: (state, action: PayloadAction<LoginDto>) => {
@@ -40,8 +42,11 @@ export const appSlice = createSlice({
 		setToggleNav: (state, action: PayloadAction<boolean>) => {
 			state.toggleNav = action.payload;
 		},
+		setToggleBackdrop: (state, action: PayloadAction<boolean>) => {
+			state.toggleBackdrop = action.payload;
+		},
 	},
 });
 
-export const { setLoginData, setRoleDetails, setSidebarPermissions, setToggleNav } = appSlice.actions;
+export const { setLoginData, setRoleDetails, setSidebarPermissions, setToggleNav, setToggleBackdrop } = appSlice.actions;
 export const appReducer = appSlice.reducer;

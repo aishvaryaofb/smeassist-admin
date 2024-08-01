@@ -1,11 +1,11 @@
-import { combineReducers, Reducer } from '@reduxjs/toolkit';
+import { combineReducers, Reducer } from "@reduxjs/toolkit";
 
-import { SmeAPI } from '@/store/apiSlice';
-import { appReducer } from '@/store/appSlice';
-import { pageReducer } from '@/store/pageSlice';
-import { pageInfoReducer } from '@/store/pageInfoSlice';
+import { SmeAPI } from "@/store/apiSlice";
+import { appReducer } from "@/store/appSlice";
+import { pageReducer } from "@/store/pageSlice";
+import { pageInfoReducer } from "@/store/pageInfoSlice";
 
-export const rootReducer : any = {
+export const rootReducer: any = {
 	...pageReducer,
 	app: appReducer,
 	pageInfo: pageInfoReducer,

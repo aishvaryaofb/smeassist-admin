@@ -11,5 +11,16 @@
         "tcomb",
         "toastify"
     ],
-    "liveServer.settings.port": 5501
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": { // for .tsx files
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
 }
