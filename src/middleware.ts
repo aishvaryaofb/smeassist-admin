@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
 		return NextResponse.redirect(destination);
 	}
 	if (hasSession && currentPath.startsWith(routes.login.path)) {
-		const destination = new URL(routes.dashboard.path, request.url);
+		const destination = new URL(routes.manageSupport.path, request.url);
 		return NextResponse.redirect(destination);
 	}
 

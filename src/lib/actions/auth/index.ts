@@ -72,7 +72,7 @@ export async function sendOtp(prevState: any, formData: FormData) {
 	return { message: "Otp send successfully!", errors: null, data: { success: true } }; // setting data {} for true value
 }
 
-export async function verifyOtp(prevState: any, formData: FormData) {
+export async function verifyMobileOtp(prevState: any, formData: FormData) {
 	const validatedFields = verifyFormSchema.safeParse({
 		loginType: formData.get("loginType"),
 		mobile: formData.get("mobile"),
@@ -106,9 +106,6 @@ export async function verifyOtp(prevState: any, formData: FormData) {
 			data: null,
 		};
 	}
-
-	cookieManager.set("authToken", responseData?.token);
-	revalidatePath(routesManager.dashboard.path);
 	return { message: "Otp verified successfully!", errors: null, data: responseData };
 }
 

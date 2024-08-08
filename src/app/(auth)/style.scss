@@ -1,12 +1,13 @@
 .pageLayout {
     display: grid;
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 300px 1fr;
 
     .sidebar {
         position: sticky;
         top: 0;
         z-index: 1;
         // background: rgb(17 24 39 / var(--tw-bg-opacity));
+        background: rgb(79 70 229 / var(--tw-bg-opacity))
     }
     .pageContent {
         padding: 16px;

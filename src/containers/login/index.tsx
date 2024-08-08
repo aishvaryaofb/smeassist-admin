@@ -1,64 +1,26 @@
 "use client";
 
-import { useEffect, useState, FC } from "react";
-import { useFormState } from "react-dom";
-import { toast } from "react-toastify";
+import { useEffect, useState, FC, memo } from "react";
 
-import TextField from "@/components/textField";
-import { sendOtp, State } from "@/lib/actions/auth";
+import { notifySuccess } from "@/lib/toast";
 import OtpStepForm from "@/containers/login/otp-step";
-import SubmitButton from "@/containers/login/submit-button";
+import MobileStepForm from "@/containers/login/mobile-step";
 
 const LoginForm: FC = () => {
-	const initialState: State = { message: null, errors: {}, data: null };
-	const [formState, formAction] = useFormState(sendOtp, initialState);
-	const { errors, message, data } = formState || {};
-	// state
-	const [formData, setFormData] = useState<{ mobile: string; otp?: string }>({
-		mobile: "",
-		otp: "",
-	});
-	const [isPending, setIsPending] = useState<boolean>(false);
+	const [state, setState] = useState<{ message: string; data?: any }>({ message: '', data: null });
+	const [formData, setFormData] = useState<{ mobile: string; otp?: string }>({ mobile: "", otp: "" });
 
 	useEffect(() => {
-		if (message) {
-			toast(message);
+		if (state?.message) {
+			notifySuccess({ message: state?.message });
 		}
-	}, [message]);
-
-	const handleChange = (value: string, type: string) => {
-		const regex = /^[0-9]*/;
-		if (!regex.test(value)) {
-			return;
-		}
-		setFormData((prev) => ({ ...prev, [type]: value }));
-	};
+	}, [state?.message]);
 
 	const getSendOtpForm = () => {
-		if (formData?.mobile && data?.success) {
+		if (formData?.mobile && state?.data?.success) {
 			return <OtpStepForm mobile={formData?.mobile} />;
 		}
-		return (
-			<form action={formAction}>
-				<div className="mb-4">
-					<TextField
-						fullWidth
-						id="mobile"
-						name="mobile"
-						variant="outlined"
-						label="Enter Mobile"
-						inputProps={{
-							maxLength: 10,
-						}}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e.target.value, "mobile")}
-						value={formData?.mobile}
-						error={!isPending && errors?.mobile}
-						helperText={!isPending && errors?.mobile}
-					/>
-				</div>
-				<SubmitButton setIsPending={setIsPending} />
-			</form>
-		);
+		return <MobileStepForm formData={formData} setState={setState} setFormData={setFormData} />;
 	};
 
 	const getContent = () => {
@@ -74,4 +36,4 @@ const LoginForm: FC = () => {
 	return getContent();
 };
 
-export default LoginForm;
+export default memo(LoginForm);

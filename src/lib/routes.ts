@@ -21,8 +21,12 @@ const createRoute = (path: string, privateRoute: boolean): Route => {
 const routes: Record<string, Route> = {
 	home: createRoute("/", false), // Public route leading to the home page.
 	login: createRoute("/login", false), // Public route for the login page.
-	dashboard: createRoute("/dashboard", true), // Private route requiring authentication for the dashboard.
 	manageSupport: createRoute("/manage-support", true), // Private route requiring authentication for the invoice page.
+	catalog: createRoute("/catalog", true), // Private route requiring authentication for the invoice page.
+	locLogs: createRoute("/loc-logs", true), // Private route requiring authentication for the invoice page.
+	locDashboard: createRoute("/loc-dashboard", true), // Private route requiring authentication for the invoice page.
+	tallyLogs: createRoute("/tally-logs", true), // Private route requiring authentication for the invoice page.
+	tallyAgentStatus: createRoute("/tally-agent-status", true), // Private route requiring authentication for the invoice page.
 };
 
 // Function to retrieve paths of all private routes.

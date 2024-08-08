@@ -78,6 +78,9 @@ class RequestManager {
 	public static async getLoggedInDetails(): Promise<any> {
 		return this.get("/api/v1/login/getLoggedInDetails");
 	}
+	public static async validateSupportUser(employeeId: string): Promise<any> {
+		return this.get(`/api/v1/support/validate/${employeeId}`);
+	}
 }
 
 export default RequestManager;

@@ -1,21 +1,21 @@
-import { createSelector } from '@reduxjs/toolkit';
+import { createSelector } from "@reduxjs/toolkit";
 
-import { RootState } from 'store/store';
+import { RootState } from "@/store";
 
-import { initialState } from '.';
+import { initialState } from ".";
 
 const selectDomain = (state: RootState) => state.app || initialState;
 
-export const selectLoginData = createSelector([selectDomain], ({ loginData }) => loginData);
+export const selectLoginData = createSelector([selectDomain], ({ loginData }: any) => loginData);
 
-export const selectIsLoggedIn = createSelector([selectDomain], ({ loginData }) => loginData?.isLoggedIn);
+export const selectIsLoggedIn = createSelector([selectDomain], ({ loginData }: any) => loginData?.isLoggedIn);
 
-export const selectToggleNav = createSelector([selectDomain], ({ toggleNav }) => toggleNav);
+export const selectToggleNav = createSelector([selectDomain], ({ toggleNav }: any) => toggleNav);
 
-export const selectAccountId = createSelector([selectDomain], ({ loginData }) => loginData?.minAccountDto?.accountId);
+export const selectAccountId = createSelector([selectDomain], ({ loginData }: any) => loginData?.minAccountDto?.accountId);
 
-export const selectAccountData = createSelector([selectDomain], ({ loginData }) => loginData?.minAccountDto);
+export const selectAccountData = createSelector([selectDomain], ({ loginData }: any) => loginData?.minAccountDto);
 
-export const selectRoleDetails = createSelector([selectDomain], ({ roleDetails }) => roleDetails.permissions);
+export const selectRoleDetails = createSelector([selectDomain], ({ roleDetails }: any) => roleDetails.permissions);
 
-export const selectSidebarPermissions = createSelector([selectDomain], ({ sidebarPermissions }) => sidebarPermissions);
+export const selectSidebarPermissions = createSelector([selectDomain], ({ sidebarPermissions }: any) => sidebarPermissions);

@@ -118,13 +118,11 @@ interface AccountDto {
 
 type BuildType = {
 	mutation: <
-	  ResultType,
-	  QueryArgType = void,
-	  BaseQuery extends BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>
-	>(
-	  arg: {
+		ResultType,
+		QueryArgType = void,
+		BaseQuery extends BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>,
+	>(arg: {
 		query: (arg: QueryArgType) => FetchArgs;
 		transformResponse?: (response: any) => ResultType;
-	  }
-	) => any;
+	}) => any;
 };

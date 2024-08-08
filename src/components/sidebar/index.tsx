@@ -13,6 +13,7 @@ import Link from "next/link";
 import classNames from "classnames";
 import { usePathname } from "next/navigation";
 
+import Image from "next/image";
 import Button from "@/components/button";
 import { signOut } from "@/lib/actions/auth";
 import { SUPPORT_PORTAL_NAV_MAP } from "@/components/sidebar/constants";
@@ -26,8 +27,12 @@ const Sidebar: FC = ({}: Props): React.ReactNode => {
 	const getLogoutButton = () => {
 		return (
 			<form action={formAction} className="w-full">
-				<Button type="submit" variant="text" className="w-full justify-start capitalize text-slate-400 hover:bg-slate-700 hover:text-white">
-					<span className="material-symbols-outlined">logout</span>
+				<Button
+					type="submit"
+					variant="text"
+					className="w-full justify-start px-4 py-2 capitalize text-white/[0.9] hover:bg-slate-700/[0.2] hover:text-white"
+				>
+					<span className="material-symbols-outlined text-2xl">logout</span>
 					<span className="ml-2">Logout</span>
 				</Button>
 			</form>
@@ -43,9 +48,9 @@ const Sidebar: FC = ({}: Props): React.ReactNode => {
 						href={data.href}
 						key={data.label}
 						className={classNames(
-							"mb-2 flex w-full items-center rounded-md px-4 py-2 text-slate-400 transition hover:bg-slate-700 hover:text-white",
+							"mb-2 flex w-full items-center rounded-md px-4 py-2 text-white/[0.9] transition hover:bg-slate-700/[0.2] hover:text-white",
 							{
-								"bg-slate-700 text-white": data.href === pathname,
+								"bg-slate-700/[0.3] text-white": data.href === pathname,
 							}
 						)}
 					>
@@ -59,16 +64,18 @@ const Sidebar: FC = ({}: Props): React.ReactNode => {
 
 	const getSidebarHeader = (): React.ReactNode => {
 		return (
-			<div className="flex items-center p-4">
-				{/* <Image src="/logo.png" width={36} height={36} alt="SME" /> */}
-				<span className="text-sm font-medium uppercase tracking-wider text-white">Admin</span>
+			<div className="flex p-4">
+				<div className="logoImage">
+					<Image src="/logo-white.svg" width={60} height={18} alt="SME" />
+				</div>
+				<div className="ml-2 mt-[6px] text-sm font-medium uppercase tracking-wider text-white">Admin</div>
 			</div>
 		);
 	};
 
 	const getContent = (): React.ReactNode => {
 		return (
-			<aside id="sidebar" className="flex flex-col items-start bg-slate-800">
+			<aside id="sidebar" className="sidebar flex flex-col items-start">
 				{getSidebarHeader()}
 				{getNav()}
 				<div className="mt-auto w-full p-4">{getLogoutButton()}</div>

@@ -1,34 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
+import { memo, useEffect, useState } from "react";
 import Cookie from "js-cookie";
-import { toast } from "react-toastify";
 import { useFormState } from "react-dom";
-import { useRouter } from "next/navigation";
 
+import routes from "@/lib/routes";
 import Modal from "@/components/modal";
 import Button from "@/components/button";
+import { useRouter } from "next/navigation";
 import TextField from "@/components/textField";
-import { State, verifyOtp } from "@/lib/actions/auth";
+import { State, verifyMobileOtp } from "@/lib/actions/auth";
+import { notifyError, notifySuccess } from "@/lib/toast";
 import SubmitButton from "@/containers/login/submit-button";
 
-const LoginForm = ({ mobile }: { mobile: string }) => {
+const OtpStepForm = ({ mobile }: { mobile: string }) => {
 	const { push } = useRouter();
 	const initialState: State = { message: null, errors: {}, data: null };
-	const [formState, formAction] = useFormState(verifyOtp, initialState);
+	const [formState, formAction] = useFormState(verifyMobileOtp, initialState);
 	const { errors, message, data } = formState || {};
 	// state
 	const [open, setOpen] = useState<boolean>(false);
 	const [isPending, setIsPending] = useState<boolean>(false);
-	const [formData, setFormData] = useState<{ mobile: string; otp?: string }>({
-		mobile: "",
-		otp: "",
-	});
+	const [formData, setFormData] = useState<{ mobile: string; otp?: string }>({ mobile: "", otp: "" });
 
 	useEffect(() => {
 		if (message) {
-			toast(message);
+			notifySuccess({ message });
 		}
 	}, [message]);
 
@@ -51,9 +48,14 @@ const LoginForm = ({ mobile }: { mobile: string }) => {
 		setOpen(false);
 	};
 
-	const handleOrgSelection = (minOrgDto: any) => {
-		Cookie.set("orgId", minOrgDto?.organisationId);
-		push("/dashboard");
+	const handleOrgSelection = (organisationId: string) => {
+		if (!organisationId) {
+			notifyError({ message: "organisationId cannot be null" });
+			return;
+		}
+		Cookie.set("orgId", organisationId);
+		Cookie.set("authToken", data?.token);
+		push(routes.manageSupport.path);
 	};
 
 	const getModal = () => {
@@ -62,7 +64,7 @@ const LoginForm = ({ mobile }: { mobile: string }) => {
 		}
 		const modalContent = data?.orgLoginList.map(({ minOrgDto }: { minOrgDto: any }, index: number) => (
 			<div key={`${minOrgDto?.name}-${index + 1}`} className="border-b last:border-0">
-				<Button onClick={handleOrgSelection} className="w-full justify-start text-slate-500 hover:bg-slate-50">
+				<Button onClick={() => handleOrgSelection(minOrgDto?.organisationId)} className="w-full justify-start text-slate-500 hover:bg-slate-50">
 					{minOrgDto?.name}
 				</Button>
 			</div>
@@ -102,4 +104,4 @@ const LoginForm = ({ mobile }: { mobile: string }) => {
 	);
 };
 
-export default LoginForm;
+export default memo(OtpStepForm);

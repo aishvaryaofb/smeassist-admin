@@ -6,20 +6,22 @@
 		"dev": "next dev -p 4007",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint --fix"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.12.0",
 		"@emotion/styled": "^11.12.0",
 		"@mui/material": "^5.16.4",
 		"@reduxjs/toolkit": "^2.2.6",
-		"@types/js-cookie": "^3.0.6",
+		"@tailwindcss/forms": "^0.5.7",
+		"autoprefixer": "^10.4.20",
 		"classnames": "^2.5.1",
 		"js-cookie": "^3.0.5",
 		"lodash": "^4.17.21",
 		"material-symbols": "^0.21.2",
 		"next": "14.2.5",
 		"node-fetch": "^3.3.2",
+		"nprogress": "^0.2.0",
 		"react": "^18",
 		"react-dom": "^18",
 		"react-hook-form": "^7.52.1",
@@ -30,6 +32,8 @@
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {
+		"@types/js-cookie": "^3.0.6",
+		"@types/lodash": "^4.17.7",
 		"@types/node": "^20",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",

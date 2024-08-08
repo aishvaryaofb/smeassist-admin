@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import LoginForm from "@/containers/login";
 
 export const metadata: Metadata = {
-	title: "Login | Admin | SMEAssist",
-	description: "Admin user for SMEAssist",
+	title: "Login | Admin SMEAssist",
 };
 
 const Login = () => {

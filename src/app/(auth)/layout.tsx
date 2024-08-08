@@ -1,3 +1,9 @@
+/**
+ *
+ * AuthLayout
+ *
+ */
+
 import React, { memo } from "react";
 import { headers } from "next/headers";
 
@@ -5,14 +11,15 @@ import RequestManager from "@/lib/request";
 import StoreProvider from "@/store/StoreProvider";
 
 import Sidebar from "@/components/sidebar";
-import Backdrop from "@/components/backdrop";
+import UnAuthorized from "@/components/ui/unauthorized";
 
 import "@/app/(auth)/style.scss";
 
 type Props = { children: React.ReactNode };
 
-const Layout = async ({ children }: Props) => {
+const AuthLayout = async ({ children }: Props) => {
 	const loginData = await RequestManager.getLoggedInDetails();
+	const isValidated = await RequestManager.validateSupportUser(loginData?.employeeDetails?.employeeId);
 
 	const getPageInfo = (): PageInfo => {
 		const headersList = headers();
@@ -30,15 +37,17 @@ const Layout = async ({ children }: Props) => {
 		};
 	};
 
+	if (!isValidated) {
+		return <UnAuthorized />;
+	}
 	return (
 		<StoreProvider loginData={loginData} pageInfo={getPageInfo()}>
 			<main id="pageLayout" className="pageLayout min-h-svh bg-slate-50">
 				<Sidebar />
 				<section className="pageContent p-4">{children}</section>
 			</main>
-			{/* <Backdrop open /> */}
 		</StoreProvider>
 	);
 };
 
-export default memo(Layout);
+export default memo(AuthLayout);

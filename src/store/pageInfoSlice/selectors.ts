@@ -1,9 +1,9 @@
-import { createSelector } from '@reduxjs/toolkit';
-import { RootState } from '@/store';
+import { createSelector } from "@reduxjs/toolkit";
+import { RootState } from "@/store";
 
-import { initialState } from '.';
+import { initialState } from ".";
 
 const selectSlice = (state: RootState) => state.pageInfo || initialState;
 
 export const selectPageInfo = createSelector([selectSlice], (state) => state);
-export const selectNamespace = createSelector([selectSlice], ({ namespace } : any) => namespace);
+export const selectNamespace = createSelector([selectSlice], ({ namespace }: any) => namespace);

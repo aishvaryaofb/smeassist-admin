@@ -1,19 +1,19 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export const initialState: PageInfo | undefined = {
-	protocol: '',
-	path: '',
+	protocol: "",
+	path: "",
 	query: {},
-	host: '',
-	domain: '',
-	ip: '',
-	env: '',
-	namespace: '',
-	platform: '',
+	host: "",
+	domain: "",
+	ip: "",
+	env: "",
+	namespace: "",
+	platform: "",
 };
 
 const pageInfoSlice = createSlice({
-	name: 'pageInfo',
+	name: "pageInfo",
 	initialState,
 	reducers: {
 		updatePageInfoFromReq(state, action: PayloadAction<any>) {
@@ -22,7 +22,7 @@ const pageInfoSlice = createSlice({
 			state.path = path;
 			state.query = query;
 			state.host = host;
-			state.domain = '';
+			state.domain = "";
 			state.platform = platform;
 			state.ip = ip;
 			state.namespace = namespace;
@@ -52,15 +52,7 @@ const pageInfoSlice = createSlice({
 	},
 });
 
-export const {
-	updatePageInfoFromReq,
-	updateProtocol,
-	updatePath,
-	updateQuery,
-	updateHost,
-	updateDomain,
-	updatePlatform,
-	updateNamespace,
-} = pageInfoSlice.actions;
+export const { updatePageInfoFromReq, updateProtocol, updatePath, updateQuery, updateHost, updateDomain, updatePlatform, updateNamespace } =
+	pageInfoSlice.actions;
 
 export const pageInfoReducer = pageInfoSlice.reducer;

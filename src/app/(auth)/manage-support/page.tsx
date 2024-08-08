@@ -1,17 +1,22 @@
+/**
+ *
+ * ManageSupportPage
+ *
+ */
+
 import type { Metadata } from "next";
-import DashboardForm from "@/containers/dashboard";
+import ManageSupportContainer from "@/containers/manage-support";
 
 export const metadata: Metadata = {
-	title: "Dashboard | Admin | SMEAssist",
-	description: "Admin user for SMEAssist",
+	title: "Manage Support | Admin SMEAssist",
 };
 
-const Dashboard = () => {
+const ManageSupportPage = async () => {
 	return (
-		<div className="dashboardWrapper">
-			<DashboardForm />
+		<div className="pageWrapper">
+			<ManageSupportContainer />
 		</div>
 	);
 };
 
-export default Dashboard;
+export default ManageSupportPage;
