@@ -51,13 +51,6 @@
 	},
 	"pre-commit": "lint:staged",
 	"lint-staged": {
-		"src/**/*.{js,ts,jsx,tsx,mdx}": [
-			"next lint",
-			"git add --force"
-		],
-		"*.json": [
-			"prettier --write",
-			"git add --force"
-		]
+		"*.{js,jsx,ts,tsx,css,md}": "prettier --write"
 	}
 }
