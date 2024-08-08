@@ -7,7 +7,7 @@ import OtpStepForm from "@/containers/login/otp-step";
 import MobileStepForm from "@/containers/login/mobile-step";
 
 const LoginForm: FC = () => {
-	const [state, setState] = useState<{ message: string; data?: any }>({ message: '', data: null });
+	const [state, setState] = useState<{ message: string; data?: any }>({ message: "", data: null });
 	const [formData, setFormData] = useState<{ mobile: string; otp?: string }>({ mobile: "", otp: "" });
 
 	useEffect(() => {
