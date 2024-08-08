@@ -46,5 +46,16 @@
 		"prettier-plugin-tailwindcss": "^0.6.5",
 		"tailwindcss": "^3.4.1",
 		"typescript": "^5.5.3"
+	},
+	"pre-commit": "lint:staged",
+	"lint-staged": {
+		"src/**/*.{js,ts,jsx,tsx,mdx}": [
+			"next lint",
+			"git add --force"
+		],
+		"*.json": [
+			"prettier --write",
+			"git add --force"
+		]
 	}
 }
